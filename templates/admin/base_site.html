@@ -1,0 +1,20 @@
+{% extends "admin/base.html" %}
+{% load i18n static %}
+
+{% block title %}{{ title|default:"Admin" }} — Hind Infratech{% endblock %}
+
+{% block extrastyle %}
+{{ block.super }}
+{% endblock %}
+
+{% block extrahead %}
+{{ block.super }}
+{% endblock %}
+
+{% block branding %}{% endblock %}
+{% block nav-global %}{% endblock %}
+
+{% block bodyclass %}{{ block.super }} custom-admin{% endblock %}
+
+{# Remove default Django title block so our base.html page-header takes over #}
+{% block content_title %}{% endblock %}

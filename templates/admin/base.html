@@ -1,0 +1,69 @@
+{% load i18n static %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE|default:'en-us' }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}{% trans 'Site administration' %}{% endblock %} — Hind Infratech</title>
+  <link rel="shortcut icon" href="{% static 'images/hind-logo-cropped.png' %}">
+
+  {% block extrastyle %}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  {# Single unified CSS — only custom_admin.css is used #}
+  <link rel="stylesheet" href="{% static 'admin/css/custom_admin.css' %}">
+  {% endblock %}
+
+  {% block extrahead %}{% endblock %}
+  {% block blockbots %}<meta name="robots" content="none">{% endblock %}
+
+  {{ media }}
+</head>
+
+<body class="{% block bodyclass %}{% endblock %}">
+
+{% block sidebar %}{% include "admin/includes/sidebar.html" %}{% endblock %}
+
+<div id="main-content">
+  {% block header %}{% include "admin/includes/header.html" %}{% endblock %}
+
+  <div id="content-area">
+    {% block messages %}
+    {% if messages %}
+    <ul class="messagelist">
+      {% for message in messages %}
+      <li class="{{ message.tags }}">{{ message|capfirst }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    {% endblock %}
+
+    {% block pretitle %}{% endblock %}
+    {% block content_title %}
+    {% if title %}
+    <div class="page-header">
+      <div class="page-title-block">
+        <h1 class="page-title">{{ title }}</h1>
+      </div>
+      {% block object-tools %}
+      {% if object_tools %}
+      <ul class="object-tools">{% block object-tools-items %}{% endblock %}</ul>
+      {% endif %}
+      {% endblock %}
+    </div>
+    {% endif %}
+    {% endblock %}
+
+    {% block content %}{% endblock %}
+    {% block sidebar_main %}{% endblock %}
+  </div>
+</div>
+
+{% block footer %}
+<script src="{% static 'admin/js/custom_admin.js' %}"></script>
+{% endblock %}
+
+{% block extrascript %}{% endblock %}
+
+</body>
+</html>

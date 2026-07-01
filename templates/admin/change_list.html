@@ -1,0 +1,63 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static admin_urls admin_list %}
+
+{% block title %}{{ title }} — Hind Infratech Admin{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div class="page-title-block">
+    <h1 class="page-title">{{ cl.opts.verbose_name_plural|capfirst }}</h1>
+    <p class="page-subtitle">{{ cl.result_count }} item{{ cl.result_count|pluralize }} found</p>
+  </div>
+  <ul class="object-tools">
+    {% block object-tools-items %}
+    {% if has_add_permission %}
+    <li>
+      {% url cl.opts|admin_urlname:'add' as add_url %}
+      <a href="{% add_preserved_filters add_url is_popup to_field %}" class="addlink">
+        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
+        </svg>
+        Add {{ cl.opts.verbose_name }}
+      </a>
+    </li>
+    {% endif %}
+    {% endblock %}
+  </ul>
+</div>
+
+{% block search %}{% include "admin/search_form.html" %}{% endblock %}
+{% block date_hierarchy %}{% if cl.date_hierarchy %}{% include "admin/date_hierarchy.html" %}{% endif %}{% endblock %}
+
+<div class="admin-list-layout{% if not cl.has_filters %} no-filters{% endif %}">
+  <div id="changelist">
+    <form id="changelist-form" method="post"
+      {% if cl.formset and cl.formset.is_multipart %}enctype="multipart/form-data"{% endif %}
+      novalidate>
+      {% csrf_token %}
+      {% if cl.formset %}
+      <div>{{ cl.formset.management_form }}</div>
+      {% endif %}
+
+      {% block result_list %}
+      {% if action_form and actions_on_top and cl.show_admin_actions %}
+      <div class="actions">{% include "admin/actions.html" %}</div>
+      {% endif %}
+
+      <div style="overflow-x:auto;">
+        {% result_list cl %}
+      </div>
+
+      {% if action_form and actions_on_bottom and cl.show_admin_actions %}
+      <div class="actions">{% include "admin/actions.html" %}</div>
+      {% endif %}
+      {% endblock %}
+
+      {% block pagination %}{% pagination cl %}{% endblock %}
+    </form>
+  </div>
+
+  
+</div>
+
+{% endblock %}

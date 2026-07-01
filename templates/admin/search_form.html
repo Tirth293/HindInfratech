@@ -1,0 +1,19 @@
+{% load i18n %}
+{% if cl.search_fields %}
+<form id="changelist-search" method="get" role="search">
+  
+    {% for key, value in cl.params.items %}
+      {% if key != search_var %}<input type="hidden" name="{{ key }}" value="{{ value }}">{% endif %}
+    {% endfor %}
+   
+    {% if cl.query %}
+      <a href="?" class="search-clear">{% translate "Clear" %}</a>
+    {% endif %}
+  </div>
+  {% if cl.query %}
+    <p class="search-result-note">
+      {{ cl.result_count }} result{{ cl.result_count|pluralize }} for "{{ cl.query }}"
+    </p>
+  {% endif %}
+</form>
+{% endif %}
