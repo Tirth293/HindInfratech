@@ -22,12 +22,12 @@
   --border:      #E5E7EB;
 }
 .navbar-logo{
-    width: 165px;
-    height: auto;
+    height: 80px;
+    width: auto;
     max-width: 100%;
     display:block;
     object-fit: contain;
-    object-position: center;
+    object-position: left center;
 }
 
 
@@ -159,7 +159,7 @@ h1, h2, h3, h4, h5, h6 {
   box-shadow: 0 8px 24px rgba(17,24,39,0.06);
 }
 .navbar > .container {
-  min-height: 70px;
+  min-height: 96px;
   align-items: center;
 }
 .navbar-brand-wrap {
@@ -902,11 +902,11 @@ footer {
   .navbar > .container {
     align-items: center;
     gap: 10px;
-    min-height: 58px;
+    min-height: 74px;
   }
   .navbar-logo {
-    width: 142px;
-    height: auto;
+    height: 62px;
+    width: auto;
   }
   .navbar-collapse {
     flex-basis: 100%;
@@ -957,8 +957,8 @@ footer {
 }
 @media (max-width:768px){
     .navbar-logo{
-        width: 136px;
-        height:auto;
+        height: 58px;
+        width: auto;
     }
     .footer-logo {
         width: 250px;
@@ -971,8 +971,8 @@ footer {
         padding-right: 14px;
     }
     .navbar-logo {
-        width: 132px;
-        height: auto;
+        height: 50px;
+        width: auto;
     }
     .navbar-toggler {
         width: 40px;
