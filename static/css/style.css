@@ -22,12 +22,12 @@
   --border:      #E5E7EB;
 }
 .navbar-logo{
-    width: 165px;
-    height: auto;
+    height: 58px;
+    width: auto;
     max-width: 100%;
     display:block;
     object-fit: contain;
-    object-position: center;
+    object-position: left center;
 }
 
 
@@ -905,8 +905,8 @@ footer {
     min-height: 58px;
   }
   .navbar-logo {
-    width: 142px;
-    height: auto;
+    height: 48px;
+    width: auto;
   }
   .navbar-collapse {
     flex-basis: 100%;
@@ -957,8 +957,8 @@ footer {
 }
 @media (max-width:768px){
     .navbar-logo{
-        width: 136px;
-        height:auto;
+        height: 44px;
+        width: auto;
     }
     .footer-logo {
         width: 250px;
@@ -971,8 +971,8 @@ footer {
         padding-right: 14px;
     }
     .navbar-logo {
-        width: 132px;
-        height: auto;
+        height: 40px;
+        width: auto;
     }
     .navbar-toggler {
         width: 40px;

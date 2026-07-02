@@ -32,7 +32,9 @@ urlpatterns = [
     path('', home, name='home'),
 ]
 
-# ── Serve media and static files in development ──
+# ── Serve media files always (no CDN/S3 configured — WhiteNoise only serves STATIC, not MEDIA) ──
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+# ── Serve static files via Django only in development (WhiteNoise handles it in production) ──
 if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL,  document_root=settings.MEDIA_ROOT)
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
