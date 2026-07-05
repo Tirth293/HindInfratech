@@ -1,8 +1,9 @@
 from django.contrib import admin
 from django.contrib.auth.models import User, Group
-from django.urls import path
+from django.urls import path, re_path
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.static import serve as static_serve
 from projects.views import home
 
 # ── Admin site branding ──
@@ -33,7 +34,17 @@ urlpatterns = [
 ]
 
 # ── Serve media files always (no CDN/S3 configured — WhiteNoise only serves STATIC, not MEDIA) ──
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# NOTE: django.conf.urls.static.static() silently returns an EMPTY list when
+# DEBUG=False, so on production (Render, DEBUG=False) it was serving nothing
+# and every project/gallery image 404'd. We register the serve view directly
+# with re_path instead, so it works in both DEBUG and production.
+urlpatterns += [
+    re_path(
+        r'^%s(?P<path>.*)$' % settings.MEDIA_URL.lstrip('/'),
+        static_serve,
+        {'document_root': settings.MEDIA_ROOT},
+    ),
+]
 
 # ── Serve static files via Django only in development (WhiteNoise handles it in production) ──
 if settings.DEBUG:

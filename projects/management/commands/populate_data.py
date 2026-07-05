@@ -29,6 +29,7 @@ class Command(BaseCommand):
                 'status': 'completed',
                 'badge_color': 'bg-blue-soft',
                 'text_color': 'text-blue',
+                'image': 'projects/devka-beach-utility-duct-1.jpeg',
             },
             {
                 'number': '02',
@@ -38,6 +39,7 @@ class Command(BaseCommand):
                 'status': 'completed',
                 'badge_color': 'bg-orange-soft',
                 'text_color': 'text-orange',
+                'image': 'projects/silvassa-box-culvert-1.jpeg',
             },
             {
                 'number': '03',
@@ -47,6 +49,7 @@ class Command(BaseCommand):
                 'status': 'completed',
                 'badge_color': 'bg-blue-soft',
                 'text_color': 'text-blue',
+                'image': 'projects/silvassa-box-culvert-2.jpeg',
             },
             {
                 'number': '04',
@@ -56,6 +59,7 @@ class Command(BaseCommand):
                 'status': 'completed',
                 'badge_color': 'badge-purple',
                 'text_color': 'text-purple',
+                'image': 'projects/dharoi-dam-precast-1.jpeg',
             },
             {
                 'number': '05',
@@ -65,6 +69,7 @@ class Command(BaseCommand):
                 'status': 'completed',
                 'badge_color': 'bg-blue-soft',
                 'text_color': 'text-blue',
+                'image': 'projects/devka-beach-utility-duct-2.jpeg',
             },
             {
                 'number': '06',
@@ -74,6 +79,7 @@ class Command(BaseCommand):
                 'status': 'completed',
                 'badge_color': 'badge-purple',
                 'text_color': 'text-purple',
+                'image': 'projects/dharoi-dam-precast-2.jpeg',
             },
             {
                 'number': '07',
@@ -83,6 +89,7 @@ class Command(BaseCommand):
                 'status': 'completed',
                 'badge_color': 'bg-blue-soft',
                 'text_color': 'text-blue',
+                'image': 'projects/silvassa-box-culvert-3.jpeg',
             },
             {
                 'number': '08',
@@ -92,6 +99,7 @@ class Command(BaseCommand):
                 'status': 'completed',
                 'badge_color': 'badge-purple',
                 'text_color': 'text-purple',
+                'image': 'projects/dharoi-dam-precast-3.jpeg',
             },
             {
                 'number': '09',
@@ -101,6 +109,7 @@ class Command(BaseCommand):
                 'status': 'completed',
                 'badge_color': 'bg-green-soft',
                 'text_color': 'text-green',
+                'image': 'projects/devka-beach-utility-duct-3.jpeg',
             },
             {
                 'number': 'OG1',
@@ -110,6 +119,7 @@ class Command(BaseCommand):
                 'status': 'ongoing',
                 'badge_color': 'bg-orange-soft',
                 'text_color': 'text-orange',
+                'image': 'projects/silvassa-box-culvert-4.jpeg',
             },
             {
                 'number': 'OG2',
@@ -119,6 +129,7 @@ class Command(BaseCommand):
                 'status': 'ongoing',
                 'badge_color': 'bg-orange-soft',
                 'text_color': 'text-orange',
+                'image': 'projects/dharoi-dam-precast-4.jpeg',
             },
             {
                 'number': 'OG3',
@@ -128,6 +139,7 @@ class Command(BaseCommand):
                 'status': 'ongoing',
                 'badge_color': 'bg-blue-soft',
                 'text_color': 'text-blue',
+                'image': 'projects/devka-beach-utility-duct-4.jpeg',
             },
             {
                 'number': 'OG4',
@@ -137,6 +149,7 @@ class Command(BaseCommand):
                 'status': 'ongoing',
                 'badge_color': 'bg-orange-soft',
                 'text_color': 'text-orange',
+                'image': 'projects/dharoi-dam-precast-1.jpeg',
             },
             {
                 'number': 'OG5',
@@ -146,6 +159,7 @@ class Command(BaseCommand):
                 'status': 'ongoing',
                 'badge_color': 'bg-orange-soft',
                 'text_color': 'text-orange',
+                'image': 'projects/silvassa-box-culvert-1.jpeg',
             },
             {
                 'number': 'OG6',
@@ -155,6 +169,7 @@ class Command(BaseCommand):
                 'status': 'ongoing',
                 'badge_color': 'bg-orange-soft',
                 'text_color': 'text-orange',
+                'image': 'projects/silvassa-box-culvert-2.jpeg',
             },
         ]
 

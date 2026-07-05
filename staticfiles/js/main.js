@@ -46,26 +46,9 @@ document.addEventListener('DOMContentLoaded', function () {
   window.addEventListener('scroll', updateActiveNav);
   updateActiveNav();
 
-  /* ── 3. PROJECT FILTER TABS ── */
-  var filterBtns  = document.querySelectorAll('#projectTabs button');
-  var projectItems = document.querySelectorAll('.project-item');
-
-  filterBtns.forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      filterBtns.forEach(function (b) { b.classList.remove('active'); });
-      this.classList.add('active');
-
-      var filter = this.dataset.filter;
-      projectItems.forEach(function (item) {
-        if (filter === 'all' || item.dataset.type === filter) {
-          item.style.display = '';
-          item.style.animation = 'fadeIn 0.4s ease';
-        } else {
-          item.style.display = 'none';
-        }
-      });
-    });
-  });
+  /* ── 3. PROJECT FILTER TABS ──
+     Handled in templates/index.html (combined with the Show More /
+     Show Less control), so it isn't duplicated here. */
 
   /* ── 4. SCROLL FADE-UP ANIMATION ── */
   var fadeEls = document.querySelectorAll('.fade-up');

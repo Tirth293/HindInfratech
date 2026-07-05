@@ -11,6 +11,18 @@ class Project(models.Model):
     client = models.CharField(max_length=100)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES)
     number = models.CharField(max_length=10, help_text="e.g., 01, 02, OG1, OG2")
+    image = models.ImageField(
+        upload_to='projects/',
+        blank=True,
+        null=True,
+        help_text="Main photo shown on the project card (optional). Recommended: 800×500px or larger."
+    )
+    image2 = models.ImageField(
+        upload_to='projects/',
+        blank=True,
+        null=True,
+        help_text="Second photo shown in the project's popup detail view (optional). Recommended: 800×500px or larger."
+    )
     badge_color = models.CharField(
         max_length=50,
         default='bg-blue-soft',

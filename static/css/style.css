@@ -541,14 +541,34 @@ h1, h2, h3, h4, h5, h6 {
   height: 100%;
   transition: transform 0.25s, box-shadow 0.25s;
   position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 .project-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 12px 36px rgba(27,79,160,0.1);
 }
+.project-card.has-image { padding: 0; }
+.project-image-wrap {
+  position: relative;
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+}
+.project-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+.project-card:hover .project-image { transform: scale(1.06); }
+.project-card-body { padding: 0; flex: 1; display: flex; flex-direction: column; }
+.project-card.has-image .project-card-body { padding: 24px; }
 .project-number {
   position: absolute;
-  top: 20px; right: 20px;
+  top: 16px; right: 16px;
   width: 36px; height: 36px;
   border-radius: 8px;
   display: flex;
@@ -556,6 +576,14 @@ h1, h2, h3, h4, h5, h6 {
   justify-content: center;
   font-size: 12px;
   font-weight: 700;
+  z-index: 2;
+}
+/* On cards with a photo, the "soft" tinted backgrounds are too transparent
+   to read over a busy image — force a solid white backing + shadow so the
+   number (e.g. 04, 08) stays legible no matter the photo underneath. */
+.project-card.has-image .project-number {
+  background: #ffffff !important;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.18);
 }
 .project-client-badge {
   display: inline-flex;
@@ -584,6 +612,192 @@ h1, h2, h3, h4, h5, h6 {
 .border-ongoing { border-color: #fde68a; }
 .badge-purple   { background: #fdf4ff; color: #7e22ce; }
 .text-purple { color: #7e22ce; }
+
+/* ── Clickable project card (opens popup) ── */
+.project-card-clickable { cursor: pointer; }
+.project-card-clickable:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 3px;
+}
+.project-image-zoom-hint {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(17,24,39,0.55);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.25s, transform 0.25s;
+  z-index: 2;
+}
+.project-card-clickable:hover .project-image-zoom-hint,
+.project-card-clickable:focus-visible .project-image-zoom-hint {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Project Detail Popup Modal ── */
+.project-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(17,24,39,0.72);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 2000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease;
+}
+.project-modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+.project-modal {
+  background: #fff;
+  border-radius: 16px;
+  max-width: 780px;
+  width: 100%;
+  max-height: 88vh;
+  overflow-y: auto;
+  position: relative;
+  transform: translateY(16px) scale(0.98);
+  transition: transform 0.25s ease;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.3);
+}
+.project-modal-overlay.active .project-modal {
+  transform: translateY(0) scale(1);
+}
+.project-modal-close {
+  position: absolute;
+  top: 14px; right: 14px;
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  border: none;
+  background: #fff;
+  color: var(--dark);
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  z-index: 3;
+  transition: background 0.2s, color 0.2s;
+}
+.project-modal-close:hover { background: var(--orange); color: #fff; }
+.project-modal-images {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  background: var(--border);
+  border-radius: 16px 16px 0 0;
+  overflow: hidden;
+}
+.project-modal-img-wrap { width: 100%; height: 260px; overflow: hidden; background: #f1f1f1; }
+.project-modal-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.project-modal-body { padding: 26px 28px 30px; }
+.project-modal-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.project-modal-number {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--blue);
+  background: #eff6ff;
+  padding: 4px 10px;
+  border-radius: 6px;
+}
+.project-modal-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+.project-modal-title { font-weight: 700; font-size: 22px; margin-bottom: 8px; color: var(--dark); }
+.project-modal-client {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--gray);
+  margin-bottom: 14px;
+}
+.project-modal-desc { color: var(--gray); font-size: 15px; line-height: 1.75; margin: 0; }
+
+@media (max-width: 576px) {
+  .project-modal-images { grid-template-columns: 1fr; }
+  .project-modal-img-wrap { height: 200px; }
+  .project-modal-body { padding: 22px 20px 26px; }
+  .project-modal-title { font-size: 19px; }
+}
+
+/* ── Show Dropdown ── */
+.project-showmore-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 36px;
+}
+.project-show-dropdown {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  border: 1.5px solid var(--border);
+  color: var(--dark);
+  font-weight: 700;
+  font-size: 14px;
+  padding: 12px 20px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+.project-show-dropdown:hover {
+  border-color: var(--blue);
+  color: var(--blue);
+  background: #eff6ff;
+}
+.project-show-dropdown-label {
+  color: #6B7280;
+  font-weight: 600;
+}
+.project-show-dropdown:hover .project-show-dropdown-label { color: var(--blue); }
+.project-show-select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: transparent;
+  border: none;
+  color: inherit;
+  font-weight: 700;
+  font-size: 14px;
+  font-family: inherit;
+  padding-right: 22px;
+  cursor: pointer;
+  outline: none;
+}
+.project-show-dropdown-icon {
+  position: absolute;
+  right: 20px;
+  font-size: 15px;
+  pointer-events: none;
+}
 
 /* ============================================================
    CLIENTS

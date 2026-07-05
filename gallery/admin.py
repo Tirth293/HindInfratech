@@ -6,7 +6,9 @@ from .models import Gallery
 @admin.register(Gallery)
 class GalleryAdmin(admin.ModelAdmin):
     # ── List view ──
-    list_display  = ('display_order', 'thumbnail_preview', 'title', 'client', 'updated_at')
+    list_display  = ('thumbnail_preview', 'display_order', 'title', 'client', 'updated_at')
+    list_display_links = ('thumbnail_preview',)   # click the photo to open the full edit page
+    list_editable = ('display_order', 'title', 'client')  # edit these directly in the table, then click "Save"
     list_filter   = ('client',)
     search_fields = ('title', 'client', 'description')
     ordering      = ('display_order',)
